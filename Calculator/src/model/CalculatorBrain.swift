@@ -12,7 +12,6 @@ struct CalculatorBrain{
     
     private var accumulator : Double?
     
-    
     mutating func performOperation(_ symbol:String){
         switch symbol {
         case "π":

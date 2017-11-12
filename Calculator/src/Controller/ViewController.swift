@@ -8,213 +8,89 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, StoreDelegate {
     
-    public let labelResult : UILabel = {
-        let label = UILabel();
-        label.translatesAutoresizingMaskIntoConstraints = false;
-        label.backgroundColor = .blue;
-        label.textAlignment = .right;
-        label.adjustsFontSizeToFitWidth = true;
-        label.textColor = .white;
-        label.text = "0";
-        label.font = UIFont.systemFont(ofSize: 38);
-        return label;
-    }();
+    var mainLayout: MainView!;
     
-    public let mainStack : UIStackView = {
-        let stack = UIStackView();
-        stack.distribution = .fillEqually;
-        stack.translatesAutoresizingMaskIntoConstraints = false;
-        stack.alignment = .fill;
-        stack.spacing = 10;
-        stack.axis = .vertical;
-        return stack;
-    }();
-    
-    public let piCalculation : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitleColor(.blue, for: .normal);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.setTitle("π", for: .normal);
-        button.addTarget(self, action: #selector(perfomOperation), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberSeven : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.setTitle("7", for: .normal);
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberEight : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.setTitle("8", for: .normal);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberNine : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.setTitle("9", for: .normal);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let rootSquareButton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("√", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.addTarget(self, action: #selector(perfomOperation), for: .touchUpInside)
-        
-        return button;
-    }();
-    
-    public let numberFourButton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("4", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberFiveButton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("5", for: .normal)
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberSixbutton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("6", for: .normal)
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberOneButton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("1", for: .normal)
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberTwoButton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("2", for: .normal)
-        button.setTitleColor(.blue, for: .normal);
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        return button;
-    }();
-    
-    public let numberThreeButton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("3", for: .normal)
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.setTitleColor(.blue, for: .normal);
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        return button;
-    }();
-    
-    public let numberZeroButton : UIButton = {
-        let button = UIButton(type: .system);
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
-        button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.setTitleColor(.blue, for: .normal);
-        return button;
-    }();
-    
-    
-    public let emptyButton : UIButton = {
-        let button = UIButton();
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
-        return button;
-    }();
-
-    public let emptyButton2 : UIButton = {
-        let button = UIButton();
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
-        return button;
-    }();
-    
-    public let emptyButton3 : UIButton = {
-        let button = UIButton();
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
-        return button;
-    }();
-    
-    public let emptyButton4 : UIButton = {
-        let button = UIButton();
-        button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
-        return button;
-    }();
+    //Math Fuctions
+    private var brain = CalculatorBrain();
     
     var userIsInTheMiddleOfTyping = false;
+    
     var displayValue : Double {
         get{
-            return Double(labelResult.text!)!;
+            return Double(mainLayout.labelResult.text!)!;
         }
         set{
-            labelResult.text = String(newValue);
+            mainLayout.labelResult.text = String(newValue);
         }
     }
     
-    public var brain = CalculatorBrain();
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        initView();
+        mainLayout = MainView(frame : CGRect.zero);
+        mainLayout.mDelegate = self;
+        self.view.addSubview(mainLayout);
         setUpLayout();
+    }
+    
+    private func setUpLayout(){
+        mainLayout.translatesAutoresizingMaskIntoConstraints = false;
+        NSLayoutConstraint.activate([
+            mainLayout.widthAnchor.constraint(equalTo: view.widthAnchor),
+            mainLayout.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mainLayout.heightAnchor.constraint(equalTo: view.heightAnchor)]);
+    }
+    
+    func didNumberPress(_ sender: UIButton) {
+        let tittleDigit = sender.currentTitle;
+        let currentDigit = mainLayout.labelResult.text!;
+        if userIsInTheMiddleOfTyping{
+            mainLayout.labelResult.text = currentDigit+tittleDigit!;
+        }
+        else{
+            mainLayout.labelResult.text = tittleDigit!;
+            userIsInTheMiddleOfTyping = true;
+        }
+        
+        checkIfLimitIsOff();
+    }
+    
+    func didSymbolPresS(_ sender: UIButton) {
+        if userIsInTheMiddleOfTyping{
+            brain.setOperand(displayValue);
+            userIsInTheMiddleOfTyping = false;
+        }
+        if let matematicalSymbol = sender.currentTitle{
+            brain.performOperation(matematicalSymbol);
+        }
+        if let result = brain.result {
+            displayValue = result;
+        }
+    }
+    
+    
+    func checkIfLimitIsOff(){
+        let currentCount = mainLayout.labelResult.text?.count;
+        if(currentCount!>=12){
+            //We stop reciving input
+            print("We got to the limit");
+            removeAllTargets();
+        }
+    }
+
+    
+    func removeAllTargets(){
+        mainLayout.numberSeven.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberEight.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberNine.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberFourButton.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberFiveButton.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberSixbutton.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberOneButton.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberTwoButton.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberThreeButton.removeTarget(nil, action: nil, for: .allEvents)
+        mainLayout.numberZeroButton.removeTarget(nil, action: nil, for: .allEvents)
     }
 }
 
