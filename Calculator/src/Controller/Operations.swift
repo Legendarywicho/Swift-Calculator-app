@@ -11,6 +11,7 @@ import UIKit
 
 extension ViewController{
     
+
     @objc func onClick(_ sender:UIButton){
         let tittleDigit = sender.currentTitle;
         let currentDigit = labelResult.text!;
@@ -25,10 +26,28 @@ extension ViewController{
         checkIfLimitIsOff();
     }
     
+    
+    @objc func perfomOperation(_ sender: UIButton){
+        
+        if userIsInTheMiddleOfTyping{
+            brain.setOperand(234.34);
+            userIsInTheMiddleOfTyping = false;
+        }
+        
+        if let matematicalSymbol = sender.currentTitle{
+            brain.performOperation(matematicalSymbol);
+        }
+        
+        if let result = brain.result {
+            displayValue = result;
+        } 
+    }
+    
     func checkIfLimitIsOff(){
         let currentCount = labelResult.text?.count;
         if(currentCount!>=12){
             //We stop reciving input
+            print("We got to the limit");
             removeAllTargets();
         }
     }

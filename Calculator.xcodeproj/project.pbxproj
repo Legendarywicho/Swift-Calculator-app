@@ -12,6 +12,7 @@
 		B82BE8721FAC2B7E00211BFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82BE8711FAC2B7E00211BFC /* ViewController.swift */; };
 		B82BE8771FAC2B7E00211BFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B82BE8761FAC2B7E00211BFC /* Assets.xcassets */; };
 		B82BE87A1FAC2B7E00211BFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B82BE8781FAC2B7E00211BFC /* LaunchScreen.storyboard */; };
+		B856434E1FB7BEB200F05924 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = B856434D1FB7BEB200F05924 /* CalculatorBrain.swift */; };
 		B89D6B3C1FB3413D00ED80A8 /* Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = B89D6B3B1FB3413D00ED80A8 /* Operations.swift */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,7 @@
 		B82BE8761FAC2B7E00211BFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B82BE8791FAC2B7E00211BFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B82BE87B1FAC2B7E00211BFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B856434D1FB7BEB200F05924 /* CalculatorBrain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		B89D6B3B1FB3413D00ED80A8 /* Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,27 +42,19 @@
 		B823D7871FAD074D0074C421 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				B823D7881FAD07590074C421 /* start */,
+				B85643501FB7CD3200F05924 /* View */,
+				B856434F1FB7CC9200F05924 /* Controller */,
+				B856434C1FB7BE9400F05924 /* model */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		B823D7881FAD07590074C421 /* start */ = {
-			isa = PBXGroup;
-			children = (
-				B82BE8711FAC2B7E00211BFC /* ViewController.swift */,
-				B823D7851FAD04CD0074C421 /* ComponentLayout.swift */,
-				B89D6B3B1FB3413D00ED80A8 /* Operations.swift */,
-			);
-			path = start;
-			sourceTree = "<group>";
-		};
-		B823D7891FAD07690074C421 /* delegate */ = {
+		B823D7891FAD07690074C421 /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
 				B82BE86F1FAC2B7E00211BFC /* AppDelegate.swift */,
 			);
-			path = delegate;
+			path = Singletons;
 			sourceTree = "<group>";
 		};
 		B823D78A1FAD07740074C421 /* resources */ = {
@@ -91,12 +85,37 @@
 			isa = PBXGroup;
 			children = (
 				B823D78A1FAD07740074C421 /* resources */,
-				B823D7891FAD07690074C421 /* delegate */,
+				B823D7891FAD07690074C421 /* Singletons */,
 				B823D7871FAD074D0074C421 /* src */,
 				B82BE8781FAC2B7E00211BFC /* LaunchScreen.storyboard */,
 				B82BE87B1FAC2B7E00211BFC /* Info.plist */,
 			);
 			path = Calculator;
+			sourceTree = "<group>";
+		};
+		B856434C1FB7BE9400F05924 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B856434D1FB7BEB200F05924 /* CalculatorBrain.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		B856434F1FB7CC9200F05924 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B82BE8711FAC2B7E00211BFC /* ViewController.swift */,
+				B89D6B3B1FB3413D00ED80A8 /* Operations.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B85643501FB7CD3200F05924 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B823D7851FAD04CD0074C421 /* ComponentLayout.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +192,7 @@
 				B82BE8721FAC2B7E00211BFC /* ViewController.swift in Sources */,
 				B823D7861FAD04CD0074C421 /* ComponentLayout.swift in Sources */,
 				B82BE8701FAC2B7E00211BFC /* AppDelegate.swift in Sources */,
+				B856434E1FB7BEB200F05924 /* CalculatorBrain.swift in Sources */,
 				B89D6B3C1FB3413D00ED80A8 /* Operations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
