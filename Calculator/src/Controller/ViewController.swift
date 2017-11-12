@@ -37,9 +37,12 @@ class ViewController: UIViewController, StoreDelegate {
     private func setUpLayout(){
         mainLayout.translatesAutoresizingMaskIntoConstraints = false;
         NSLayoutConstraint.activate([
+            mainLayout.topAnchor.constraint(equalTo: view.topAnchor),
             mainLayout.widthAnchor.constraint(equalTo: view.widthAnchor),
-            mainLayout.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            mainLayout.heightAnchor.constraint(equalTo: view.heightAnchor)]);
+            mainLayout.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainLayout.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainLayout.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ]);
     }
     
     func didNumberPress(_ sender: UIButton) {

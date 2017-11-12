@@ -9,15 +9,18 @@
 import Foundation;
 import UIKit;
 
+
 class MainView: UIView {
     
     var shouldSetupConstraints = true
     var mDelegate:StoreDelegate!;
-
+    
+    static var mainColor = UIColor(red: 0/255, green: 122/255, blue: 250/255, alpha: 1);
+    
     public let labelResult : UILabel = {
         let label = UILabel();
         label.translatesAutoresizingMaskIntoConstraints = false;
-        label.backgroundColor = .blue;
+        label.backgroundColor = MainView.mainColor;
         label.textAlignment = .right;
         label.adjustsFontSizeToFitWidth = true;
         label.textColor = .white;
@@ -39,7 +42,7 @@ class MainView: UIView {
     public let piCalculation : UIButton = {
         let button = UIButton(type: .system);
         button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitleColor(.blue, for: .normal);
+        button.setTitleColor(MainView.mainColor, for: .normal);
         button.titleLabel?.font = .systemFont(ofSize: 22)
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
         button.setTitle("π", for: .normal);
@@ -47,6 +50,50 @@ class MainView: UIView {
         return button;
     }();
 
+    public let plusButton : UIButton = {
+        let button = UIButton(type: .system);
+        button.translatesAutoresizingMaskIntoConstraints = false;
+        button.setTitleColor(MainView.mainColor, for: .normal);
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.setTitle("+", for: .normal);
+        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        return button;
+    }();
+    
+    public let restButton : UIButton = {
+        let button = UIButton(type: .system);
+        button.translatesAutoresizingMaskIntoConstraints = false;
+        button.setTitleColor(.blue, for: .normal);
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.setTitle("-", for: .normal);
+        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        return button;
+    }();
+    
+    public let multiplyButton : UIButton = {
+        let button = UIButton(type: .system);
+        button.translatesAutoresizingMaskIntoConstraints = false;
+        button.setTitleColor(.blue, for: .normal);
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.setTitle("×", for: .normal);
+        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        return button;
+    }();
+    
+    public let divideButton : UIButton = {
+        let button = UIButton(type: .system);
+        button.translatesAutoresizingMaskIntoConstraints = false;
+        button.setTitleColor(.blue, for: .normal);
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.setTitle("÷", for: .normal);
+        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        return button;
+    }();
+    
     public let numberSeven : UIButton = {
         let button = UIButton(type: .system);
         button.translatesAutoresizingMaskIntoConstraints = false;
@@ -168,35 +215,44 @@ class MainView: UIView {
         return button;
     }();
 
-    public let emptyButton : UIButton = {
+    public let cos : UIButton = {
         let button = UIButton();
         button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
+        button.addTarget(self, action: #selector(onSymbolClick), for: .touchUpInside)
+        button.setTitle("cos", for: .normal)
+        button.setTitleColor(.blue, for: .normal);
+        button.titleLabel?.font = .systemFont(ofSize: 22);
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
         return button;
     }();
 
-    public let emptyButton2 : UIButton = {
+    public let changeSign : UIButton = {
         let button = UIButton();
         button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
+        button.setTitle("±", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         return button;
     }();
 
-    public let emptyButton3 : UIButton = {
+    public let dotButton : UIButton = {
         let button = UIButton();
         button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
+        button.setTitle(".", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         return button;
     }();
 
-    public let emptyButton4 : UIButton = {
+    public let equalButton : UIButton = {
         let button = UIButton();
         button.translatesAutoresizingMaskIntoConstraints = false;
-        button.setTitle("0", for: .normal)
-        button.backgroundColor = .white;
+        button.setTitle("=", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         return button;
     }();
     
@@ -220,63 +276,70 @@ class MainView: UIView {
     func setUpLayout(){
         NSLayoutConstraint.activate([
             labelResult.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 50),
-            labelResult.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant : 50),
-            labelResult.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -40),
+            labelResult.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant : 30),
+            labelResult.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -30),
             labelResult.heightAnchor.constraint(equalToConstant: 50)
             ])
 
         mainStack.topAnchor.constraint(equalTo: labelResult.bottomAnchor, constant: 20).isActive = true;
-        mainStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant : 30).isActive = true;
-        mainStack.trailingAnchor.constraint(equalTo: self.trailingAnchor , constant : -30).isActive = true;
+        mainStack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant : 30).isActive = true;
+        mainStack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor , constant : -30).isActive = true;
+        mainStack.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true;
 
-        let firstRow = UIStackView(arrangedSubviews: [piCalculation, numberSeven, numberEight,numberNine]);
+        let firstRow = UIStackView(arrangedSubviews: [plusButton, restButton, multiplyButton,divideButton]);
         firstRow.distribution = .fillEqually;
         firstRow.alignment = .fill;
         firstRow.spacing = 5;
         firstRow.translatesAutoresizingMaskIntoConstraints = false;
 
-        let secondRow = UIStackView(arrangedSubviews: [rootSquareButton,numberFourButton,numberFiveButton,numberSixbutton]);
+        let secondRow =  UIStackView(arrangedSubviews: [piCalculation, numberSeven, numberEight,numberNine]);
         secondRow.distribution = .fillEqually;
         secondRow.alignment = .fill;
         secondRow.spacing = 5;
         secondRow.translatesAutoresizingMaskIntoConstraints = false;
-
-        let thirdRow = UIStackView(arrangedSubviews: [emptyButton,numberOneButton,numberTwoButton,numberThreeButton])
+        
+        let thirdRow = UIStackView(arrangedSubviews: [rootSquareButton,numberFourButton,numberFiveButton,numberSixbutton]);
         thirdRow.distribution = .fillEqually;
         thirdRow.alignment = .fill;
         thirdRow.spacing = 5;
         thirdRow.translatesAutoresizingMaskIntoConstraints = false;
 
 
-        let fourthRow = UIStackView(arrangedSubviews: [emptyButton2,emptyButton3,numberZeroButton,emptyButton4]);
+        let fourthRow = UIStackView(arrangedSubviews: [cos,numberOneButton,numberTwoButton,numberThreeButton])
 
         fourthRow.distribution = .fillEqually;
         fourthRow.alignment = .fill;
         fourthRow.spacing = 5;
         fourthRow.translatesAutoresizingMaskIntoConstraints = false;
 
-
+        let fifthRow = UIStackView(arrangedSubviews: [changeSign,dotButton,numberZeroButton,equalButton]);
+        fifthRow.distribution = .fillEqually;
+        fifthRow.alignment = .fill;
+        fifthRow.spacing = 5;
+        fifthRow.translatesAutoresizingMaskIntoConstraints = false;
+        
         mainStack.addArrangedSubview(firstRow);
         mainStack.addArrangedSubview(secondRow);
         mainStack.addArrangedSubview(thirdRow);
         mainStack.addArrangedSubview(fourthRow);
+        mainStack.addArrangedSubview(fifthRow);
 
         //Setting up constraints for firstRow;
         firstRow.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor).isActive = true;
         firstRow.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor).isActive = true;
-        firstRow.heightAnchor.constraint(equalToConstant: 60).isActive = true;
-
+        
         secondRow.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor).isActive = true;
         secondRow.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor).isActive = true;
-        secondRow.heightAnchor.constraint(equalToConstant: 60).isActive = true;
-
+        
         thirdRow.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor).isActive = true;
         thirdRow.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor).isActive = true;
-        thirdRow.heightAnchor.constraint(equalToConstant: 60).isActive = true;
-
+        
         fourthRow.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor).isActive = true;
         fourthRow.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor).isActive = true;
-        fourthRow.heightAnchor.constraint(equalToConstant: 60).isActive = true;
+        
+        fifthRow.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor).isActive = true;
+        fifthRow.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor).isActive = true;
+        
     }
     
     func initView(){
