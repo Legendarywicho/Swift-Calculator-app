@@ -57,7 +57,7 @@ class MainView: UIView {
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
         button.titleLabel?.font = .systemFont(ofSize: 22)
         button.setTitle("+", for: .normal);
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        button.addTarget(self, action: #selector(onSymbolClick), for: .touchUpInside)
         return button;
     }();
     
@@ -68,7 +68,7 @@ class MainView: UIView {
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
         button.titleLabel?.font = .systemFont(ofSize: 22)
         button.setTitle("-", for: .normal);
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        button.addTarget(self, action: #selector(onSymbolClick), for: .touchUpInside)
         return button;
     }();
     
@@ -79,7 +79,7 @@ class MainView: UIView {
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
         button.titleLabel?.font = .systemFont(ofSize: 22)
         button.setTitle("×", for: .normal);
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        button.addTarget(self, action: #selector(onSymbolClick), for: .touchUpInside)
         return button;
     }();
     
@@ -90,7 +90,7 @@ class MainView: UIView {
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
         button.titleLabel?.font = .systemFont(ofSize: 22)
         button.setTitle("÷", for: .normal);
-        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
+        button.addTarget(self, action: #selector(onSymbolClick), for: .touchUpInside)
         return button;
     }();
     
@@ -200,6 +200,7 @@ class MainView: UIView {
         button.setTitle("3", for: .normal)
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0);
         button.setTitleColor(.blue, for: .normal);
+        button.addTarget(self, action: #selector(onClick), for: .touchUpInside)
         button.titleLabel?.font = .systemFont(ofSize: 22)
         return button;
     }();
@@ -232,6 +233,7 @@ class MainView: UIView {
         button.setTitle("±", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.addTarget(self, action: #selector(onSymbolClick), for: .touchUpInside)
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         return button;
     }();
@@ -251,6 +253,7 @@ class MainView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false;
         button.setTitle("=", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(onSymbolClick), for: .touchUpInside)
         button.titleLabel?.font = .systemFont(ofSize: 22)
         button.backgroundColor = UIColor(red:0.93, green:0.93, blue:0.93, alpha:1.0)
         return button;
